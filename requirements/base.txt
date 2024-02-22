@@ -1,0 +1,1 @@
+django-leaflet==0.29.0

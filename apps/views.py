@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from .models import Location
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+
+from .models import Location
 
 
 @csrf_exempt
@@ -15,6 +16,7 @@ def receive_location(request):
         return JsonResponse(
             {"status": "error", "message": "Only POST requests are allowed."}
         )
+
 
 def map_view(request):
     locations = Location.objects.all()
