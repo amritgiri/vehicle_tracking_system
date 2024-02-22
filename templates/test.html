@@ -1,0 +1,36 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Location Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([0, 0], 2); // Set initial map center and zoom level
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add markers for each location received from Django backend
+    var locations = []; // Fetch locations from Django backend and store here
+    locations.forEach(function(location) {
+        L.marker([location.latitude, location.longitude]).addTo(map)
+            .bindPopup('Latitude: ' + location.latitude + '<br>Longitude: ' + location.longitude)
+            .openPopup();
+    });
+</script>
+
+</body>
+</html> {% endcomment %}
