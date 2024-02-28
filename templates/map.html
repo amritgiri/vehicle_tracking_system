@@ -14,15 +14,28 @@
         height: 100%;
         z-index: 999;
       }
+      .dot {
+        background-color: blue;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+      }
+      #clear-button {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000; /* Ensure clear button is on top of the map */
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
+    <button id="clear-button">Clear Markers</button>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
       // Initialize map with full screen view and center on Prithivi Chowk, Pokhara, Nepal
-      var map = L.map("map").setView([28.2098, 83.9819], 16);
+      var map = L.map("map").setView([28.255365, 83.976569], 20);
 
       // Add a tile layer
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -30,24 +43,35 @@
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
+      {% comment %} var prithiviChowk = L.marker([28.2098, 83.9819], {
+        icon: L.divIcon({ className: "dot" }),
+      }).addTo(map); {% endcomment %}
+
       // Function to add blue dot to map
-      function addDot(latitude, longitude) {
-        L.circle([latitude, longitude], {
-          color: "blue", // Outline color
-          fillColor: "blue", // Fill color
-          fillOpacity: 1, // Opacity of fill
-          radius: 5, // Radius of the circle (in meters)
-        }).addTo(map);
+      function addMarker(latitude, longitude, delay) {
+        setTimeout(() => {
+          L.marker([latitude, longitude], {
+            icon: L.divIcon({ className: "dot" }),
+          }).addTo(map).bindPopup("Vehicle Location: " + latitude + "," + longitude)
+          .openPopup();
+        }, delay);
       }
 
       // Fetch location data from Django backend
       function fetchLocations() {
-        fetch("/receive_locations/")
+        fetch("/get_locations/")
           .then((response) => response.json())
           .then((data) => {
-            data.forEach((location) => {
-              addDot(location.latitude, location.longitude);
+            data.forEach((location, index) => {
+              const delay = (index + 1) * 500;
+              addMarker(location.latitude, location.longitude, delay);
             });
+
+            // Focus on the last location plotted
+            if (data.length > 0) {
+              var lastLocation = data[data.length - 1];
+              map.setView([lastLocation.latitude, lastLocation.longitude]);
+            }
           })
           .catch((error) => console.error("Error:", error));
       }
@@ -56,7 +80,15 @@
       fetchLocations();
 
       // Fetch and plot locations periodically (every 5 seconds)
-      setInterval(fetchLocations, 5000);
+      {% comment %} setInterval(fetchLocations, 5000); {% endcomment %}
+
+      document.getElementById("clear-button").addEventListener("click", function() {
+        map.eachLayer(function (layer) {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+          }
+        });
+      });
     </script>
   </body>
 </html>
