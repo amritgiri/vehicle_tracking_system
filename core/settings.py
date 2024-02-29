@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-xp69dxefyvf$g3gom+&ynx(^y4y3v+(_gvdy_gnq^d1)l*0fi=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["giriamrit.com.np","amritgiri.github.io"]
+ALLOWED_HOSTS = ["www.giriamrit.com.np", "www.amritgiri.github.io", "127.0.0.1"]
 
 
 # Application definition
