@@ -9,7 +9,7 @@ TinyGPSPlus gps;
 SoftwareSerial gpsSerial(10, 11);  // GPS module connected to pins 10 (RX) and 11 (TX)
 SoftwareSerial gsmSerial(SIM800_RX_PIN, SIM800_TX_PIN);  // GSM module connected to pins 7 (RX) and 8 (TX)
 
-const char* server = "localhost"; // or "127.0.0.1"
+const char* server = "giriamrit.com.np"; // or "127.0.0.1"
 const int serverPort = 80;
 const String endpoint = "/receive_location/";
 
