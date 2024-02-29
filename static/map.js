@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .addTo(map)
             .bindPopup("Vehicle Location: " + latitude + "," + longitude)
             .openPopup();
+            const end = new Date().getTime(); // Record end time
+            console.log("Marker added. Delay:", end - start, "ms");
         }, delay);
     }
   
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           data.forEach((location, index) => {
-            const delay = (index + 1) * 500;
+            const delay = (index + 1) * 2000;
             addMarker(location.latitude, location.longitude, delay);
           });
   
