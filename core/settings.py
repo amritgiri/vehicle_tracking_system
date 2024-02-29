@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,10 @@ SECRET_KEY = "django-insecure-xp69dxefyvf$g3gom+&ynx(^y4y3v+(_gvdy_gnq^d1)l*0fi=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.giriamrit.com.np", "www.amritgiri.github.io", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "7b93-2400-1a00-bde0-cd00-999c-1ccc-b464-e2b1.ngrok-free.app",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -52,7 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
-import os
 
 TEMPLATES = [
     {
@@ -128,3 +131,12 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# twilio api
+TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+# TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")

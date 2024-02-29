@@ -16,13 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .addTo(map)
             .bindPopup("Vehicle Location: " + latitude + "," + longitude)
             .openPopup();
-            const end = new Date().getTime(); // Record end time
-            console.log("Marker added. Delay:", end - start, "ms");
         }, delay);
     }
   
     function fetchLocations() {
-      fetch("/get_locations/")
+      fetch("/receive_location/")
         .then((response) => response.json())
         .then((data) => {
           data.forEach((location, index) => {
@@ -46,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
           map.removeLayer(layer);
         }
       });
+      
+      fetchLocations();
     });
   });
   
