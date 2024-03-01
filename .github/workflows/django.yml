@@ -32,4 +32,5 @@ jobs:
         run: |
           source venv/bin/activate
           pip install django
+          pip install python-dotenv
           python manage.py test
