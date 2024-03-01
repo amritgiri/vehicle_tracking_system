@@ -32,6 +32,5 @@ jobs:
         run: |
           source venv/bin/activate
           pip install django
-          pip install python-dotenv
           pip install -r requirements/dev.txt
-          python manage.py test
+          python manage.py test --exclude-tag twilio
