@@ -33,4 +33,4 @@ jobs:
           source venv/bin/activate
           pip install django
           pip install -r requirements/dev.txt
-          python manage.py test --exclude-tag twilio
+          python manage.py test -k "not twilio"
