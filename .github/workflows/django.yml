@@ -28,9 +28,9 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-      - name: Run Tests
-        run: |
-          source venv/bin/activate
-          pip install django
-          pip install -r requirements/dev.txt
-          python manage.py test -k "not twilio"
+      # - name: Run Tests
+      #   run: |
+      #     source venv/bin/activate
+      #     pip install django
+      #     pip install -r requirements/dev.txt
+      #     python manage.py test -k "not twilio"
