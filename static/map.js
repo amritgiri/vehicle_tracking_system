@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           data.forEach((location, index) => {
-            const delay = (index + 1) * 2000;
+            const delay = (index + 1) * 500;
             addMarker(location.latitude, location.longitude, delay);
           });
   

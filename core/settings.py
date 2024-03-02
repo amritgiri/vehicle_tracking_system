@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "7b93-2400-1a00-bde0-cd00-999c-1ccc-b464-e2b1.ngrok-free.app",
     "127.0.0.1",
+    "localhost",
 ]
 
 
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps",
-    # "leaflet",
 ]
 
 MIDDLEWARE = [
@@ -140,3 +140,10 @@ load_dotenv()
 TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
 # TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")
+
+CELERY_BEAT_SCHEDULE = {
+    "fetch-locations-every-1-second": {
+        "task": "apps.tasks.fetch_locations_periodically",
+        "schedule": 2.0,  # Run every 1 second
+    },
+}
