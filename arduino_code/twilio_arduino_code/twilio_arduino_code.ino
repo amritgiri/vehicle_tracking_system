@@ -14,7 +14,7 @@ const char* twilioPhoneNumber = "+9779867303991"; // Twilio phone number to send
 void setup() {
   Serial.begin(9600);
   gpsSerial.begin(9600);  // GPS baud rate
-  gsmSerial.begin(9700);  // GSM baud rate
+  gsmSerial.begin(9600);  // GSM baud rate
 }
 
 void loop() {
