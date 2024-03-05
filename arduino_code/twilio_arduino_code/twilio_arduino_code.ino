@@ -2,19 +2,16 @@
 #include <SoftwareSerial.h>
 #include <ArduinoHttpClient.h>
 
-#define SIM800_RX_PIN 8
-#define SIM800_TX_PIN 7
-
 TinyGPSPlus gps;
-SoftwareSerial gpsSerial(2, 3);  // GPS module connected to pins 2 (RX) and 3 (TX)
-SoftwareSerial gsmSerial(SIM800_RX_PIN, SIM800_TX_PIN);  // GSM module connected to pins 8 (RX) and 7 (TX)
+SoftwareSerial gpsSerial(11, 10);  // GPS module connected to pins 10 (RX) and 11 (TX)
+SoftwareSerial gsmSerial(2, 3);  // GSM module connected to pins 2 (RX) and 3 (TX)
 
 const char* twilioPhoneNumber = "+17814887695"; // Twilio phone number to send SMS
 
 void setup() {
   Serial.begin(9600);
   gpsSerial.begin(9600);  // GPS baud rate
-  gsmSerial.begin(9600);  // GSM baud rate
+  
 }
 
 void loop() {
@@ -49,7 +46,8 @@ void loop() {
 void sendGPSData(float latitude, float longitude) {
   // Format the message
   String message = "Latitude: " + String(latitude, 6) + ", Longitude: " + String(longitude, 6);
-
+  
+  gsmSerial.begin(9600);  // GSM baud rate
   // Connect to GSM network
   gsmSerial.println("AT+CMGF=1"); // Set SMS text mode
   delay(1000);
@@ -62,5 +60,5 @@ void sendGPSData(float latitude, float longitude) {
   gsmSerial.println(message);
   delay(1000);
   gsmSerial.write(0x1A); // Send Ctrl+Z to indicate end of message
-  delay(1000);
+  delay(10000);
 }

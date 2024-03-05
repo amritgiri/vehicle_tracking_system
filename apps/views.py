@@ -21,7 +21,7 @@ def get_locations(request):
 
 
 def receive_location(request):
-    with open("received_location.json") as f:
+    with open("home.json") as f:
         json_data = json.load(f)
 
     # Return JSON response with data and set safe=False
