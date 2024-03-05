@@ -9,7 +9,7 @@ TinyGPSPlus gps;
 SoftwareSerial gpsSerial(2, 3);  // GPS module connected to pins 2 (RX) and 3 (TX)
 SoftwareSerial gsmSerial(SIM800_RX_PIN, SIM800_TX_PIN);  // GSM module connected to pins 8 (RX) and 7 (TX)
 
-const char* twilioPhoneNumber = "+9779867303991"; // Twilio phone number to send SMS
+const char* twilioPhoneNumber = "+17814887695"; // Twilio phone number to send SMS
 
 void setup() {
   Serial.begin(9600);
