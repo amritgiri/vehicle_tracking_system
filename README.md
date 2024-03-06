@@ -10,6 +10,4 @@
     ```bash
     celery -A core worker --loglevel=info
     celery -A core beat --loglevel=info
-    ```
-
-    sudo systemctl start snapd.apparmor 
+    ``
