@@ -12,17 +12,8 @@ from django.conf import settings
 from .models import Location
 
 
-def get_locations(request):
-    # Load JSON data from file
-    with open("test.json") as f:
-        json_data = json.load(f)
-
-    # Return JSON response with data and set safe=False
-    return JsonResponse(json_data, safe=False)
-
-
 def receive_location(request):
-    with open("test.json") as f:
+    with open("received_location.json") as f:
         json_data = json.load(f)
 
     # Return JSON response with data and set safe=False
