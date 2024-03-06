@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from twilio.twiml.messaging_response import MessagingResponse
 from .utils import get_twilio_client
+from core.settings import TWILIO_PHONE_NUMBER
 
 from .models import Location
 
@@ -21,7 +22,7 @@ def get_locations(request):
 
 
 def receive_location(request):
-    with open("received_location.json") as f:
+    with open("test.json") as f:
         json_data = json.load(f)
 
     # Return JSON response with data and set safe=False
@@ -32,7 +33,7 @@ def receive_location(request):
 def handle_incoming_sms(request):
     client = get_twilio_client()
     messages = client.messages.list(
-        to="+17814887695",
+        to= TWILIO_PHONE_NUMBER,
         # limit=1 # for latest
     )
 
